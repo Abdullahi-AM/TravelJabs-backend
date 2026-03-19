@@ -30,10 +30,7 @@ const rolesController = new Controller(rolesModel, database);
 const statusController = new Controller(statusModel, database);
 
 // Endpoints -----------------------------------------------
-app.get("/api", (req, res) => {
-  res.json({ message: "Travel Jabs API" });
-});
-
+app.get("/api", (req, res) => res.json({ message: "Travel Jabs API" }));
 app.get("/api/appointments", (req, res) => appointmentsController.get(req, res, null));
 app.get("/api/appointments/clinics/:id", (req, res) => appointmentsController.get(req, res, "clinic"));
 app.get("/api/appointments/:id", (req, res) => appointmentsController.get(req, res, "primary"));
@@ -74,6 +71,4 @@ app.delete("/api/status/:id", (req, res) => statusController.remove(req, res));
 
 // Start server --------------------------------------------
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
