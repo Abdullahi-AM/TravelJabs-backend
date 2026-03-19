@@ -1,10 +1,11 @@
-const mysql = require("mysql2/promise");
+import mysql from "mysql2";
 
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "traveljabsv1db"
-});
+  database: "traveljabsv1db",
+  namedPlaceholders: true
+}).promise();
 
-module.exports = db;
+export default db;
