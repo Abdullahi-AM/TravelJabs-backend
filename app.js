@@ -7,6 +7,8 @@ import vaccinesModel from "./models/vaccines-model.js";
 import vaccinationsModel from "./models/vaccinations-model.js";
 import rolesModel from "./models/roles-model.js";
 import statusModel from "./models/status-model.js";
+import clinicsModel from "./models/clinics-model.js";
+import staffModel from "./models/staff-model.js";
 
 // Configure express app -----------------------------------
 const app = express();
@@ -28,6 +30,8 @@ const vaccinesController = new Controller(vaccinesModel, database);
 const vaccinationsController = new Controller(vaccinationsModel, database);
 const rolesController = new Controller(rolesModel, database);
 const statusController = new Controller(statusModel, database);
+const clinicsController = new Controller(clinicsModel, database);
+const staffController = new Controller(staffModel, database);
 
 // Endpoints -----------------------------------------------
 app.get("/api", (req, res) => {
@@ -71,6 +75,29 @@ app.get("/api/status/:id", (req, res) => statusController.get(req, res, "primary
 app.post("/api/status", (req, res) => statusController.post(req, res));
 app.put("/api/status/:id", (req, res) => statusController.put(req, res));
 app.delete("/api/status/:id", (req, res) => statusController.remove(req, res));
+
+app.get("/api/clinics", (req, res) => clinicsController.get(req, res, null));
+app.get("/api/clinics/:id", (req, res) =>
+  clinicsController.get(req, res, "primary")
+);
+app.post("/api/clinics", (req, res) => clinicsController.post(req, res));
+app.put("/api/clinics/:id", (req, res) => clinicsController.put(req, res));
+app.delete("/api/clinics/:id", (req, res) =>
+  clinicsController.remove(req, res)
+);
+
+app.get("/api/staff", (req, res) => staffController.get(req, res, null));
+app.get("/api/staff/:id", (req, res) =>
+  staffController.get(req, res, "primary")
+);
+app.get("/api/staff/clinic/:id", (req, res) =>
+  staffController.get(req, res, "clinic")
+);
+app.post("/api/staff", (req, res) => staffController.post(req, res));
+app.put("/api/staff/:id", (req, res) => staffController.put(req, res));
+app.delete("/api/staff/:id", (req, res) =>
+  staffController.remove(req, res)
+);
 
 // Start server --------------------------------------------
 const PORT = process.env.PORT || 3000;
