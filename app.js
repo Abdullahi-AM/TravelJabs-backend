@@ -77,27 +77,17 @@ app.put("/api/status/:id", (req, res) => statusController.put(req, res));
 app.delete("/api/status/:id", (req, res) => statusController.remove(req, res));
 
 app.get("/api/clinics", (req, res) => clinicsController.get(req, res, null));
-app.get("/api/clinics/:id", (req, res) =>
-  clinicsController.get(req, res, "primary")
-);
+app.get("/api/clinics/:id", (req, res) => clinicsController.get(req, res, "primary"));
 app.post("/api/clinics", (req, res) => clinicsController.post(req, res));
 app.put("/api/clinics/:id", (req, res) => clinicsController.put(req, res));
-app.delete("/api/clinics/:id", (req, res) =>
-  clinicsController.remove(req, res)
-);
+app.delete("/api/clinics/:id", (req, res) => clinicsController.remove(req, res));
 
 app.get("/api/staff", (req, res) => staffController.get(req, res, null));
-app.get("/api/staff/:id", (req, res) =>
-  staffController.get(req, res, "primary")
-);
-app.get("/api/staff/clinic/:id", (req, res) =>
-  staffController.get(req, res, "clinic")
-);
+app.get("/api/staff/:id", (req, res) => staffController.get(req, res, "primary"));
+app.get("/api/staff/clinic/:id", (req, res) => staffController.get(req, res, "clinic"));
 app.post("/api/staff", (req, res) => staffController.post(req, res));
 app.put("/api/staff/:id", (req, res) => staffController.put(req, res));
-app.delete("/api/staff/:id", (req, res) =>
-  staffController.remove(req, res)
-);
+app.delete("/api/staff/:id", (req, res) => staffController.remove(req, res));
 
 // Start server --------------------------------------------
 const PORT = process.env.PORT || 3000;
