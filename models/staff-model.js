@@ -4,9 +4,10 @@ model.table = "Staff";
 
 model.fields = [
   "Staff.StaffID",
-  "Staff.StaffName",
-  "Staff.StaffClinicID",
-  "Staff.StaffRoleID"
+  "Staff.StaffRoleID",
+  "Staff.StaffFirstname",
+  "Staff.StaffLastname",
+  "Staff.StaffClinicID"
 ];
 
 model.buildReadQuery = (req, variant) => {
@@ -28,6 +29,9 @@ model.buildReadQuery = (req, variant) => {
     case "clinic":
       where = " WHERE Staff.StaffClinicID = :ID";
       break;
+    case "clinicians":
+      where = " WHERE Staff.StaffClinicID = :ID AND Staff.StaffRoleID = 2";
+      break;
   }
 
   return `SELECT ${fields} FROM ${table}${joins}${where}`;
@@ -35,16 +39,18 @@ model.buildReadQuery = (req, variant) => {
 
 model.buildCreateQuery = () => {
   return `INSERT INTO ${model.table} SET
-    StaffName = :StaffName,
-    StaffClinicID = :StaffClinicID,
-    StaffRoleID = :StaffRoleID`;
+    StaffRoleID = :StaffRoleID,
+    StaffFirstname = :StaffFirstname,
+    StaffLastname = :StaffLastname,
+    StaffClinicID = :StaffClinicID`;
 };
 
 model.buildUpdateQuery = () => {
   return `UPDATE ${model.table} SET
-    StaffName = :StaffName,
-    StaffClinicID = :StaffClinicID,
-    StaffRoleID = :StaffRoleID
+    StaffRoleID = :StaffRoleID,
+    StaffFirstname = :StaffFirstname,
+    StaffLastname = :StaffLastname,
+    StaffClinicID = :StaffClinicID
     WHERE StaffID = :ID`;
 };
 

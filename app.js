@@ -83,8 +83,9 @@ app.put("/api/clinics/:id", (req, res) => clinicsController.put(req, res));
 app.delete("/api/clinics/:id", (req, res) => clinicsController.remove(req, res));
 
 app.get("/api/staff", (req, res) => staffController.get(req, res, null));
+app.get("/api/staff/clinics/:id", (req, res) => staffController.get(req, res, "clinic"));
+app.get("/api/staff/clinics/:id/clinicians", (req, res) => staffController.get(req, res, "clinicians"));
 app.get("/api/staff/:id", (req, res) => staffController.get(req, res, "primary"));
-app.get("/api/staff/clinic/:id", (req, res) => staffController.get(req, res, "clinic"));
 app.post("/api/staff", (req, res) => staffController.post(req, res));
 app.put("/api/staff/:id", (req, res) => staffController.put(req, res));
 app.delete("/api/staff/:id", (req, res) => staffController.remove(req, res));
