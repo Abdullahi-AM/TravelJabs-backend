@@ -11,8 +11,20 @@ model.fields = [
 ];
 
 model.buildReadQuery = (req, variant) => {
-  let table = model.table;
-  let fields = model.fields;
+  let table = `${model.table}
+    LEFT JOIN Patients ON AppointmentPatientID = PatientID
+    LEFT JOIN Staff ON AppointmentStaffID = StaffID
+    LEFT JOIN Status ON AppointmentStatusID = StatusID
+    LEFT JOIN Clinics ON AppointmentClinicID = ClinicID`;
+  let fields = [
+    ...model.fields,
+    "PatientFirstname AS AppointmentPatientFirstname",
+    "PatientLastname AS AppointmentPatientLastname",
+    "StaffFirstname AS AppointmentStaffFirstname",
+    "StaffLastname AS AppointmentStaffLastname",
+    "StatusName AS AppointmentStatusName",
+    "ClinicName AS AppointmentClinicName"
+  ];
   let where = "";
 
   switch (variant) {
